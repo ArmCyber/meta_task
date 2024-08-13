@@ -1,0 +1,80 @@
+@import 'bootstrap';
+
+.form-wrapper {
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.btn.media-library-submit {
+    color: #ffffff !important;
+
+    &[data-state="idle"] {
+        background-color: var(--bs-primary);
+
+        &::after {
+            content: "Start Upload";
+        }
+    }
+
+    &[data-state="processing"] {
+        pointer-events: none;
+        opacity: 0.5;
+        background-color: var(--bs-gray);
+
+        &::after {
+            content: "Processing";
+        }
+    }
+
+    &[data-state="failed"] {
+        pointer-events: none;
+        opacity: 0.5;
+        background-color: var(--bs-danger);
+
+        &::after {
+            content: "Failed";
+        }
+    }
+
+    &[data-state="no-network"] {
+        pointer-events: none;
+        opacity: 0.5;
+        background-color: var(--bs-danger);
+
+        &::after {
+            content: "No network connection";
+        }
+    }
+}
+
+.media-library-progress {
+    text-align: center;
+
+    &:not([data-state]) {
+        display: none;
+    }
+
+    &[data-state="processing"] {
+        .media-library-progress-bar {
+            background-color: var(--bs-primary);
+        }
+    }
+
+    &[data-state="success"] {
+        .media-library-progress-bar {
+            background-color: var(--bs-success);
+        }
+    }
+
+    &[data-state="failed"] {
+        .media-library-progress-bar {
+            background-color: var(--bs-danger);
+        }
+    }
+
+    &::after {
+        content: attr(data-progress);
+        display: inline;
+    }
+}
